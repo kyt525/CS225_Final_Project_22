@@ -8,3 +8,12 @@ Neha Valvala (nehasv2),
 Shriya Surti (ssurt2)
 
 Project Proposal:
+
+Deliverables
+------------
+
+All code can be found in the /code
+
+Datasets are stored as txt files under /data
+
+The project report, development logs, team contract, etc can be found under /documents

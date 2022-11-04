@@ -2,7 +2,7 @@ Leading Question:
 Tripadvisor doesn't meet our standards, so we will make a trip planner that's way better than Tripadvisor's. We will use the OpenFlight data set to determine the shortest path between two airports based on the actual distance between all the stops that are between the said two airports. Not Done
 
 Dataset Acquisition:
-We will use the OpenFlights Airports Database and the OpenFlights/Airline Route Mapper Route Database. However, to account for the stops within the routes in the database, we will only use the routes with zero stops(direct flights). Done
+We will use the OpenFlights Airports Database and the OpenFlights/Airline Route Mapper Route Database. However, since the datasets have unnecessary information and entries, we will filter out the entries and properties that we don't need.
 
 Data Format:
 We will be using two of OpenFlights datasets, the routes dataset as well as the airport dataset. The route dataset provides us with 67663 entries providing information on the Airline, Airline ID, Source Airport, Court Airport ID, Destination Airport, Destination ID, Codeshare, Stops, equipment. We will be planning on using the Source and Destination airports, and the Stops to get strictly directly flights. For the airport database we are given 10,000 entries including the airport ID, Name, City, Country, IATA code, ICAO code, Latitude, Longitude, Altitude, Timezone, Daylight Savings Time, Timezone Type and Source. We will be using just the Airport ID, Latitude, and Longitude to find the distance between each airport. Not Done

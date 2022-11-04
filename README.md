@@ -12,8 +12,8 @@ Project Proposal:
 Deliverables
 ------------
 
-+ All code can be found in the /code
++ All code can be found in the [/code]
 
-+ Datasets are stored as txt files under /data
++ Datasets are stored as txt files under [/data]
 
-+ The project report, development logs, team contract, etc can be found under /documents
++ The project report, development logs, team contract, etc can be found under [/documents]

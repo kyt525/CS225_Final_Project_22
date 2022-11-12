@@ -1,22 +1,47 @@
 Leading Question:
-Tripadvisor doesn't meet our standards, so we will make a trip planner that's way better than Tripadvisor's. We will use the OpenFlight data set to determine the shortest path between two airports based on the actual distance between all the stops that are between the said two airports. 
+Tripadvisor doesn't meet our standards, so we will make a trip planner that's way better than Tripadvisor's. We will 
+use the OpenFlight data set to determine the shortest path between two airports based on the actual distance between 
+all the stops that are between the said two airports. 
 
 Dataset Acquisition:
-We will use the OpenFlights Airports Database and the OpenFlights/Airline Route Mapper Route Database. However, since the datasets have unnecessary information and entries, we will filter out the entries and properties that we don't need.
+We will use the OpenFlights Airports Database and the OpenFlights/Airline Route Mapper Route Database. However, since 
+the datasets have unnecessary information and entries, we will filter out the entries and properties that we don't 
+need.
 
 Data Format:
-We will be using two of OpenFlights datasets, the routes dataset as well as the airport dataset. The route dataset provides us with 67663 entries providing information on the Airline, Airline ID, Source Airport, Court Airport ID, Destination Airport, Destination ID, Codeshare, Stops, equipment. We will be planning on using the Source and Destination airports, and the Stops to get strictly directly flights. For the airport database we are given 10,000 entries including the airport ID, Name, City, Country, IATA code, ICAO code, Latitude, Longitude, Altitude, Timezone, Daylight Savings Time, Timezone Type and Source. We will be using just the Airport ID, Latitude, and Longitude to find the distance between each airport. 
+We will be using two of OpenFlights datasets, the routes dataset as well as the airport dataset. The route dataset 
+provides us with 67663 entries providing information on the Airline, Airline ID, Source Airport, Court Airport ID, 
+Destination Airport, Destination ID, Codeshare, Stops, equipment. We will be planning on using the Source and 
+Destination airports, and the Stops to get strictly directly flights. For the airport database we are given 10,000 
+entries including the airport ID, Name, City, Country, IATA code, ICAO code, Latitude, Longitude, Altitude, Timezone, 
+Daylight Savings Time, Timezone Type and Source. We will be using just the Airport ID, Latitude, and Longitude to find 
+the distance between each airport. 
 
 Data Correction:
-The original OpenFlights Airports Database contains a lot of information for each entry of airport, we will only use the "Airport ID", "City", "Country", "Latitude", and "Longitude" properties of each entry. The original OpenFlights/Airline Route Mapper Route Database also contains a lot of information for each entry of route, we will only use the "Source airport ID", "Destination airport ID", and "stops." In addition, the OpenFlights Airports Database contains entries of different type of transportation other than flights(airports). For example, there are entries with "train stations" and "ferry terminals." We will not use transportation types other than flights, so we will filter out the unnecessary entries. Also, to account for the distances between stops of each route, we will only use entries with direct flights(ie. zero stops). When an entry is missing or the values are ot possible, we will omit the entry from the dataset when implementing the graph.
+The original OpenFlights Airports Database contains a lot of information for each entry of airport, we will only use 
+the "Airport ID", "City", "Country", "Latitude", and "Longitude" properties of each entry. The original 
+OpenFlights/Airline Route Mapper Route Database also contains a lot of information for each entry of route, we will 
+only use the "Source airport ID", "Destination airport ID", and "stops." In addition, the OpenFlights Airports Database 
+contains entries of different type of transportation other than flights(airports). For example, there are entries with 
+"train stations" and "ferry terminals." We will not use transportation types other than flights, so we will filter out 
+the unnecessary entries. Also, to account for the distances between stops of each route, we will only use entries with 
+direct flights(ie. zero stops). When an entry is missing or the values are ot possible, we will omit the entry from the 
+dataset when implementing the graph.
 
 Data Storage:
-We will store our data in a directed, weighted graph. Each airport will be stored as a node in a graph, and each flight will be a directed edge. This direction determines if the flight is heading to, or from, the airport. The edges, or directed distances from one airport to another, are stored as a struct. We will then use the edges to determine the shortest path to and from locations using the distances. 
+We will store our data in a directed, weighted graph. Each airport will be stored as a node in a graph, and each flight 
+will be a directed edge. This direction determines if the flight is heading to, or from, the airport. The edges, or 
+directed distances from one airport to another, are stored as a struct. We will then use the edges to determine the 
+shortest path to and from locations using the distances. 
 
 Algorithm:
 - We will use a BFS to traverse our graph to find the shortest distance.
-- For the covered algorithm, we will be using Dijkstra’s Algorithm to find the shortest path between airports. For the uncovered algorithm, we will use the Betweenness centrality algorithm to enhance our trip planner's function by checking more central airports (airports with more shortests paths through them) first before less central ones.
-- For our trip planner, we will need the routes with zero stops (direct flights), and the airport name, code and location of the start airport and the destination airport. This data will help us build our implementation of the directed, weighted graph. Our implementation will output the list of airports in the terminal.
+- For the covered algorithm, we will be using Dijkstra’s Algorithm to find the shortest path between airports. For the 
+  uncovered algorithm, we will use the Betweenness centrality algorithm to enhance our trip planner's function by 
+  checking more central airports (airports with more shortests paths through them) first before less central ones.
+- For our trip planner, we will need the routes with zero stops (direct flights), and the airport name, code and 
+  location of the start airport and the destination airport. This data will help us build our implementation of the 
+  directed, weighted graph. Our implementation will output the list of airports in the terminal.
 
 
 Estimated Function Efficiency: O(V^3) for the betweenness centrality
@@ -24,5 +49,6 @@ Estimated Function Efficiency: O(V^3) for the betweenness centrality
 Timeline:
 Week 1: Filter datasets and store them into graph. 
 Week 2: Implement our traversal and algorithms to find the shortest path. 
-Week 3: Build on the shortest path algorithm to find the optimal route that passes through multiple airports to simulate a trip planner. 
+Week 3: Build on the shortest path algorithm to find the optimal route that passes through multiple airports to 
+        simulate a trip planner. 
 Week 4: Final testings and optimizations.

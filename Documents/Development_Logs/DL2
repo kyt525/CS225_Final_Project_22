@@ -1,0 +1,18 @@
+Development Log (Date: 11/05/22 -- 11/11/22)
+
+Weekly Goals
+Our goals last week were to filter the datasets and store the data into the graph data structure. We did not accomplish this since we did not properly 
+assign the tasks to each member. We still needed to specify what data structures to use to store the graph with.
+
+Specific Tasks Completed (and by who)
+We did not complete any tasks this week. We simply assigned tasks for the following week.
+
+Problems Encountered
+We did not encounter any problems this week.
+
+Plans for next week
+We will filter out datasets and store them into a vector of linked-lists as the implementation of the graph. Concretely, we will finish writing the 
+structs and start to construct the class and finish the constructor of the class.
+
+Optional: Questions for mentor
+None for now. If we need, we will email out mentor.

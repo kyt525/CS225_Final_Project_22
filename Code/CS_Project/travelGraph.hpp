@@ -10,27 +10,26 @@ class TravelGraph {
     public:
 
     // airport struct
-    struct Airports {
+    struct airport {
         int id;
-        float latitude;
-        float longitude;
+        double latitude;
+        double longitude;
 
         string city; // for trip planner
         string country; // for trip planner
     };
 
     // graph node
-    struct Node {
-        Airport airport;
-        Airport* next;
-        float dist;
+    struct node {
+        airport current;
+        airport* next;
+        double dist;
     };
 
     // member functions
     TravelGraph(); // constructor (makes a travel graph object)
-    float ShortestDist(Airport a1, Airport a2) const;
+    double distanceBetween(airport a1, airport a2) const;
 
     private:
-    vector<Airport*> adjList;
-
+    vector<airport*> adjList;
 };

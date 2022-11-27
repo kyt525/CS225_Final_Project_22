@@ -14,8 +14,6 @@ using namespace std;
 class TravelGraph {
     public:
     TravelGraph(const string& airportData, const string& routeData); // input a file (?)
-    vector<airport> cleanAirportData(string fileInfo);
-    vector<airport> cleanRouteData(string fileInfo);
 
     // airport struct
     struct airport {
@@ -40,6 +38,9 @@ class TravelGraph {
 
     private:
     vector<airport*> adjList;
+
+    vector<airport> cleanAirportData(string fileInfo);
+    vector<airport> cleanRouteData(string fileInfo);
 };
 
 

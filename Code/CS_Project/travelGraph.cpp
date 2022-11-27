@@ -13,7 +13,7 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     vector<pair<airport,airport>> routes = cleanRouteData(fileInfo2); // whether an airport is adjacent to the other
 
     // creating a graph
-    
+
 }
 
 double TravelGraph::distanceBetween(airport a1, airport a2) const {
@@ -136,7 +136,7 @@ vector<pair<airport, airport>> TravelGraph::cleanRouteData(string fileInfo) {
             }
 
             if ((col == 8) && (stoi(detail) != 0)) {
-                validAirport = false;
+                validRoute = false;
             }
         }
 

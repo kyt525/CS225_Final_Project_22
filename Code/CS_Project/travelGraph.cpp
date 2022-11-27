@@ -7,9 +7,13 @@ using namespace std;
 #define EARTH_RADIUS_M 6372797.56085 // radius of Earth in m
 
 TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
-    string fileInfo = file_to_string(airportData);
-    vector<airport> airports = cleanAirportData(fileInfo);
+    string fileInfo1 = file_to_string(airportData);
+    vector<airport> airports = cleanAirportData(fileInfo1); // list of airports
+    string fileInfo2 = file_to_string(routeData);
+    vector<pair<airport,airport>> routes = cleanRouteData(fileInfo2); // whether an airport is adjacent to the other
+
     // creating a graph
+    
 }
 
 double TravelGraph::distanceBetween(airport a1, airport a2) const {
@@ -60,7 +64,7 @@ string Trim(const string & str) {
     return TrimLeft(TrimRight(str));
 }
 
-// need to clean string by only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
+// need to clean airport data by only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
 // helper that returns vector of airports
 vector<airport> TravelGraph::cleanAirportData(string fileInfo) {
     vector<airport> airports;
@@ -107,4 +111,38 @@ vector<airport> TravelGraph::cleanAirportData(string fileInfo) {
         }
     }
     return airports;
+}
+
+// need to clean routes data by only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops - only keeping direct flights i.e 0 stops)
+// helper that returns vector of airport pairs
+vector<pair<airport, airport>> TravelGraph::cleanRouteData(string fileInfo) {
+    vector<airport> routes;
+    vector<string> entries; // airport entries: each entry is a string with airport details separated by commas
+    int numRows = SplitString(fileInfo, '\n', entries);
+    for (int row = 0; row < numRows; row++) {
+        pair<airport, airport> route; // each entry = details of a route
+        bool validRoute = true;
+        vector<string> details; // each detail in string form (need to turn ids into ints)
+        int numCols = SplitString(entries.at(row), ',', details);
+        for (int col = 0; col < numCols; col++) {
+            string detail = Trim(details.at(col));
+            // only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops)
+            if (col == 4) {
+                route.first = stoi(detail);
+            }
+
+            if (col == 6) {
+                route.second = stoi(detail);
+            }
+
+            if ((col == 8) && (stoi(detail) != 0)) {
+                validAirport = false;
+            }
+        }
+
+        if (validRoute) {
+            routes.push_back(route);
+        }
+    }
+    return routes;
 }

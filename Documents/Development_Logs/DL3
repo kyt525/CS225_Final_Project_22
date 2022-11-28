@@ -1,0 +1,20 @@
+Development Log (Date: 11/11/22 -- 11/18/22)
+
+Weekly Goals
+Our goals were to finish writing the structs and start to construct the class, specifically, finish the constructor of the class.
+
+Specific Tasks Completed (and by who)
+Set up the data structure -made the graph class -made the structs -started writing the member functions (distance calculator)
+
+Problems Encountered
+We haven't tested the code yet because we want to create a Makefile for testing. We haven't completely cleaned the data either, 
+which we had expected to do by the end of the week.
+
+Plans for next week
+We plan on finishing cleaning the data and storing it in the graph. We also will implement the BFS traversal and then finish the 
+Makefile and simple test cases for testing the code we have written.
+
+Optional: Questions for mentor
+None for now. If we need, we will email our mentor.
+
+Restore original file

@@ -12,17 +12,51 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     string fileInfo1 = file_to_string(airportData);
     vector<airport> airports = cleanAirportData(fileInfo1); // list of airports
     string fileInfo2 = file_to_string(routeData);
-    vector<pair<string,string>> routes = cleanRouteData(fileInfo2); // whether an airport is adjacent to the other: in airport ids
+    vector<pair<int,int>> routes = cleanRouteData(fileInfo2); // whether an airport is adjacent to the other: in airport ids
 
     // creating a graph
     for (unsigned i = 0; i < airports.size(); i++) {
-        adjlists.insert(airports.at(i), {});
+        adjLists.insert(airports.at(i), {});
     }
 
     for (unsigned j = 0; j < routes.size(); j++) {
-        
-    }
+        // bools to check whether the source and destination airports in the route are also in the airpots list
+        bool validSource = false;
+        bool validDest = false;
 
+        int sourceID = routes.at(j).first;
+        int destID = routes.at(j).second;
+
+        // need to create new airport objects to add to the graph
+        airport source;
+        airport dest;
+        source.id = sourceID;
+        dest.id = destID;
+        for (unsigned k = 0; k < airports.size(); k++) {
+            // airport curr = airports.at(k);
+            if (airports.at(k).id == sourceID) {
+                validSource = true;
+                // finish defining the SOURCE airport
+                source.latitude = airports.at(k).latitude;
+                source.longitude = airports.at(k).longitude;
+                source.city = airports.at(k).city;
+                source.country = airports.at(k).country;
+            }
+            if (curr.id == destID) {
+                validDest = true;
+                // finish defining the DEST airport
+                dest.latitude = airports.at(k).latitude;
+                dest.longitude = airports.at(k).longitude;
+                dest.city = airports.at(k).city;
+                dest.country = airports.at(k).country;
+            }
+        }
+
+        if (validSource && validDest) {
+            pair<airport, double> flight(dest, distanceBetween(source,dest)); // make a pair of (dest, distance)
+            adjLists.find(source)->second.push_back(flight); // add pair to respective source's adjList
+        }
+    }
 }
 
 double TravelGraph::distanceBetween(airport a1, airport a2) const {
@@ -42,47 +76,40 @@ double TravelGraph::distanceBetween(airport a1, airport a2) const {
 vector<airport> TravelGraph::cleanAirportData(string fileInfo) {
     vector<airport> airports;
     vector<string> entries; // airport entries: each entry is a string with airport details separated by commas
+    
     int numRows = SplitString(fileInfo, '\n', entries);
     for (int row = 0; row < numRows; row++) {
         airport a; // each entry = details of an airport
         bool validAirport = true;
         vector<string> details; // each detail in string form (need to turn id into a int and lat, log to decimals)
+        
         int numCols = SplitString(entries.at(row), ',', details);
         for (int col = 0; col < numCols; col++) {
             string detail = Trim(details.at(col));
             // only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
-            if (col == 0) {
-                int convertedDetail = stoi(detail);
-                a.id = convertedDetail;
-            }
+            if (col == 0) 
+                a.id = stoi(detail);
 
-            if (col == 2) {
+            else if (col == 2) 
                 a.city = detail;
-            }
 
-            if (col == 3) {
+            else if (col == 3) 
                 a.country = detail;
-            }
 
-            if (col == 6) {
-                double convertedDetail = stod(detail);
-                a.latitude = convertedDetail;
-            }
+            else if (col == 6)
+                a.latitude = stod(detail);
 
-            if (col == 7) {
-                double convertedDetail = stod(detail);
-                a.longitude = convertedDetail;
-            }
+            else if (col == 7)
+                a.longitude = stod(detail);
 
-            if ((col == 13) && (detail != "airport")) {
+            else if ((col == 12) && (detail != "airport"))
                 validAirport = false;
-            }
         }
 
-        if (validAirport) {
+        if (validAirport) 
             airports.push_back(a);
-        }
     }
+    
     return airports;
 }
 
@@ -91,31 +118,30 @@ vector<airport> TravelGraph::cleanAirportData(string fileInfo) {
 vector<pair<int, int>> TravelGraph::cleanRouteData(string fileInfo) {
     vector<airport> routes;
     vector<string> entries; // airport entries: each entry is a string with airport details separated by commas
+    
     int numRows = SplitString(fileInfo, '\n', entries);
     for (int row = 0; row < numRows; row++) {
         pair<airport, airport> route; // each entry = details of a route
         bool validRoute = true;
         vector<string> details; // each detail in string form (need to turn ids into ints)
+        
         int numCols = SplitString(entries.at(row), ',', details);
         for (int col = 0; col < numCols; col++) {
             string detail = Trim(details.at(col));
             // only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops)
-            if (col == 4) {
+            if (col == 4)
                 route.first = stoi(detail);
-            }
 
-            if (col == 6) {
+            else if (col == 6)
                 route.second = stoi(detail);
-            }
 
-            if ((col == 8) && (stoi(detail) != 0)) {
+            else if ((col == 8) && (stoi(detail) != 0))
                 validRoute = false;
-            }
         }
 
-        if (validRoute) {
+        if (validRoute)
             routes.push_back(route);
-        }
     }
+
     return routes;
 }

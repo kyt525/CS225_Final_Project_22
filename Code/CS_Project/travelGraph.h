@@ -19,6 +19,8 @@ class TravelGraph {
 
     // airport struct
     struct airport {
+        
+
         int id;
         double latitude;
         double longitude;

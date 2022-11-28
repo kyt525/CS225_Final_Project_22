@@ -19,7 +19,8 @@ class TravelGraph {
 
     // airport struct
     struct airport {
-        
+        bool operator <(const airport& other);
+        // bool operator <(const airport& air1, const airport& air2);
 
         int id;
         double latitude;
@@ -42,7 +43,7 @@ class TravelGraph {
 
     private:
     map<airport, vector<pair<airport, double>>> adjLists;
-
+    
     vector<airport> cleanAirportData(string fileInfo);
-    vector<pair<string, string>> cleanRouteData(string fileInfo);
+    vector<pair<int, int>> cleanRouteData(string fileInfo);
 };

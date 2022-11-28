@@ -51,8 +51,4 @@ TEST_CASE("distance 1") {
         {"uAcT", "CS500"}
         };
     REQUIRE(students == answer);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/remotes/origin/main

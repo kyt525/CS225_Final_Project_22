@@ -9,11 +9,13 @@
 #include <cassert>
 #include <fstream>
 
+#include "utils.h"
+
 using namespace std;
 
 class TravelGraph {
     public:
-    TravelGraph(const string& airportData, const string& routeData); // input a file (?)
+    TravelGraph(const string& airportData, const string& routeData); // input data files
 
     // airport struct
     struct airport {
@@ -25,29 +27,20 @@ class TravelGraph {
         string country; // for trip planner
     };
 
-    // graph node
-    struct node {
-        airport current;
-        airport* next;
-        double dist;
-    };
+    // // graph node
+    // struct node {
+    //     airport current;
+    //     airport* next;
+    //     double dist;
+    // };
 
     // member functions
     TravelGraph(); // constructor (makes a travel graph object)
     double distanceBetween(airport a1, airport a2) const;
 
     private:
-    vector<airport*> adjList;
+    map<airport, vector<pair<airport, double>>> adjLists;
 
     vector<airport> cleanAirportData(string fileInfo);
-    vector<airport> cleanRouteData(string fileInfo);
+    vector<pair<string, string>> cleanRouteData(string fileInfo);
 };
-
-
-// universal functions (may need another file though)
-string file_to_string(const string& filename);
-int SplitString(const string & str1, char sep, vector<string> &fields);
-string TrimRight(const std::string & str);
-string TrimLeft(const std::string & str);
-string Trim(const string & str);
-

@@ -1,5 +1,7 @@
-#include "travelGraph.hpp"
 #include <bits/stdc++.h>
+
+#include "travelGraph.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -10,9 +12,16 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     string fileInfo1 = file_to_string(airportData);
     vector<airport> airports = cleanAirportData(fileInfo1); // list of airports
     string fileInfo2 = file_to_string(routeData);
-    vector<pair<airport,airport>> routes = cleanRouteData(fileInfo2); // whether an airport is adjacent to the other
+    vector<pair<string,string>> routes = cleanRouteData(fileInfo2); // whether an airport is adjacent to the other: in airport ids
 
     // creating a graph
+    for (unsigned i = 0; i < airports.size(); i++) {
+        adjlists.insert(airports.at(i), {});
+    }
+
+    for (unsigned j = 0; j < routes.size(); j++) {
+        
+    }
 
 }
 
@@ -26,42 +35,6 @@ double TravelGraph::distanceBetween(airport a1, airport a2) const {
     double dist = EARTH_RADIUS_M * y;
 
     return dist; 
-}
-
-string file_to_string(const std::string& filename){ 
-  ifstream text(filename);
-
-  stringstream strStream;
-  if (text.is_open()) {
-    strStream << text.rdbuf();
-  }
-  return strStream.str();
-}
-
-int SplitString(const std::string & str1, char sep, std::vector<std::string> &fields) {
-    string str = str1;
-    string::size_type pos;
-    while((pos=str.find(sep)) != string::npos) {
-        fields.push_back(str.substr(0,pos));
-        str.erase(0,pos+1);  
-    }
-    fields.push_back(str);
-    return fields.size();
-}
-
-string TrimRight(const string & str) {
-    string tmp = str;
-    return tmp.erase(tmp.find_last_not_of(" ") + 1);
-}
-
-string TrimLeft(const string & str) {
-    string tmp = str;
-    return tmp.erase(0, tmp.find_first_not_of(" "));
-}
-
-string Trim(const string & str) {
-    string tmp = str;
-    return TrimLeft(TrimRight(str));
 }
 
 // need to clean airport data by only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
@@ -114,8 +87,8 @@ vector<airport> TravelGraph::cleanAirportData(string fileInfo) {
 }
 
 // need to clean routes data by only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops - only keeping direct flights i.e 0 stops)
-// helper that returns vector of airport pairs
-vector<pair<airport, airport>> TravelGraph::cleanRouteData(string fileInfo) {
+// helper that returns vector of airport id (int) pairs 
+vector<pair<int, int>> TravelGraph::cleanRouteData(string fileInfo) {
     vector<airport> routes;
     vector<string> entries; // airport entries: each entry is a string with airport details separated by commas
     int numRows = SplitString(fileInfo, '\n', entries);

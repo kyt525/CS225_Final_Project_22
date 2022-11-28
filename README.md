@@ -17,3 +17,5 @@ Deliverables
 + [Datasets are stored as txt files under ][Data/]
 
 + [The project report, development logs, team contract, etc can be found under ][Documents/]
+
++ The final presentation and project report can be found under the [Final Deliverables\]

@@ -1,0 +1,5 @@
+are we allowed to make our implementation specific to our data set(any file in the form of CSV), or do we have to make it universal
+
+ie could we skip indexes for the airports if there are train stations or something?
+
+would we be tested on train stations and other ports, or would we just be tested on airports?

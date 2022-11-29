@@ -18,3 +18,9 @@ utils.o: CS_Project/utils.cpp CS_Project/utils.h
 
 clean:
 	rm -f core *.o main tests
+
+# edits: CC = clang++
+# CFLAGS = -Wall -g -w -std=c++1y -clang
+# LDFLAGS = -std=c++1y -stdlib=libc++ -lc++abi
+
+# main: main.o travelGraph.o tests.o utils.o -o out

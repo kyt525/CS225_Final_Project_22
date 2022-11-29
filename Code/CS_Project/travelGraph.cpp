@@ -8,6 +8,22 @@ using namespace std;
 #define PI 3.1415926535897932846
 #define EARTH_RADIUS_M 6372797.56085 // radius of Earth in m
 
+pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1) {
+    for (unsigned i = 0; i < adjLists.size(); i++) {
+        TravelGraph::airport a2 = adjLists.at(i).first;
+        if ((a1.id == a2.id) && (a1.latitude == a2.latitude) && (a1.longitude == a2.longitude) && (a1.city == a2.city) && (a1.country == a2.country)) {
+            return &adjLists.at(i);
+        }
+    }
+}
+
+// bool TravelGraph::airport::operator==(airport& other) {
+//     if ((id == other.id) && (latitude == other.latitude) && (longitude == other.longitude) && (city == other.city) && (country == other.country)) {
+//         return true;
+//     }
+//     return false;
+// }
+
 bool TravelGraph::airport::operator <(const TravelGraph::airport& other) {
     if (id < other.id) {
         return true;
@@ -30,19 +46,19 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
 
     // creating a graph
     for (unsigned i = 0; i < airports.size(); i++) {
-        pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>> temp(airports.at(i), vector<pair<TravelGraph::airport, double>>());
-        adjLists.insert(temp);
+        pair<TravelGraph::airport, VP> temp(airports.at(i), VP());
+        adjLists.push_back(temp);
     }
 
     for (unsigned j = 0; j < routes.size(); j++) {
-        bools to check whether the source and destination airports in the route are also in the airpots list
+        // bools to check whether the source and destination airports in the route are also in the airpots list
         bool validSource = false;
         bool validDest = false;
 
         int sourceID = routes.at(j).first;
         int destID = routes.at(j).second;
 
-        need to create new airport objects to add to the graph
+        // need to create new airport objects to add to the graph
         TravelGraph::airport source;
         TravelGraph::airport dest;
         source.id = sourceID;
@@ -57,7 +73,7 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
                 source.city = airports.at(k).city;
                 source.country = airports.at(k).country;
             }
-            if (curr.id == destID) {
+            if (airports.at(k).id == destID) {
                 validDest = true;
                 // finish defining the DEST airport
                 dest.latitude = airports.at(k).latitude;
@@ -69,7 +85,7 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
 
         if (validSource && validDest) {
             pair<TravelGraph::airport, double> flight(dest, distanceBetween(source,dest)); // make a pair of (dest, distance)
-            adjLists.find(source)->second.push_back(flight); // add pair to respective source's adjList
+            find(source)->second.push_back(flight); // add pair to respective source's adjList
         }
     }
     
@@ -102,7 +118,7 @@ vector<TravelGraph::airport> TravelGraph::cleanAirportData(string fileInfo) {
         int numCols = SplitString(entries.at(row), ',', details);
         for (int col = 0; col < numCols; col++) {
             string detail = Trim(details.at(col));
-            // only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
+            // only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 12th (type)
             if (col == 0) 
                 a.id = stoi(detail);
 
@@ -144,16 +160,16 @@ vector<pair<int, int>> TravelGraph::cleanRouteData(string fileInfo) {
         int numCols = SplitString(entries.at(row), ',', details);
         for (int col = 0; col < numCols; col++) {
             string detail = Trim(details.at(col));
-            // only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops)
-            if (col == 4)
+            // only keeping the 3th (source airport ID), 5th (destination airport id), 7th (stops)
+            if (col == 3)
                 route.first = stoi(detail);
 
-            else if (col == 6)
+            else if (col == 5)
                 route.second = stoi(detail);
 
-            else if ((col == 8) && (stoi(detail) != 0))
+            else if ((col == 7) && (stoi(detail) != 0))
                 validRoute = false;
-        }
+        }//if no destination airport ID then delete entry
 
         if (validRoute)
             routes.push_back(route);

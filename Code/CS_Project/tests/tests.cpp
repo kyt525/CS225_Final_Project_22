@@ -39,7 +39,7 @@ int correctRoutes(const vector<pair<int, int>>& routes, const vector<vector<int>
     if(routes.size() != answer.size())
         return 1;
         
-    for(int i = 0; i < airports.size(); i++)
+    for(int i = 0; i < routes.size(); i++)
         if(routes[i].first != answer[i][0]))
             return 2;
         else if(routes[i].second != answer[i][1])

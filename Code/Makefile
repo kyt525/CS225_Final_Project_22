@@ -4,8 +4,14 @@ CFLAGS = -Wall -g -w
 output: main.o travelGraph.o tests.o utils.o
 	$(CC) $(CFLAGS) main.o travelGraph.o tests.o utils.o -o output
 
-tests.o: CS_Project/tests/tests.cpp
-	$(CC) $(CFLAGS) -c CS_Project/tests/tests.cpp
+test: catchmain.o tests.o travelGraph.o utils.o
+	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o utils.o -o test
+
+catchmain.o: ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 
+	$(CC) $(CFLAGS) -c ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 
+
+tests.o: catchmain.o CS_Project/tests/tests.cpp
+	$(CC) $(CFLAGS) -c CS_Project/tests/tests.cpp catchmain.o 
 
 main.o: CS_Project/main.cpp
 	$(CC) $(CFLAGS) -c CS_Project/main.cpp

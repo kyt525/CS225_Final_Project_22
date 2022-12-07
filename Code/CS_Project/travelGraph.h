@@ -15,6 +15,7 @@ using namespace std;
 
 class TravelGraph {
     public:
+    //TravelGraph();
     TravelGraph(const string& airportData, const string& routeData); // input data files
 
     // airport struct
@@ -41,12 +42,14 @@ class TravelGraph {
     // member functions
     TravelGraph(); // constructor (makes a travel graph object)
     double distanceBetween(airport a1, airport a2) const;
+    vector<airport> cleanAirportData(string fileInfo);
+    vector<pair<int, int>> cleanRouteData(string fileInfo);
 
     private:
     vector<pair<airport, vector<pair<airport, double>>>> adjLists;
     
-    vector<airport> cleanAirportData(string fileInfo);
-    vector<pair<int, int>> cleanRouteData(string fileInfo);
+    // vector<airport> cleanAirportData(string fileInfo);
+    // vector<pair<int, int>> cleanRouteData(string fileInfo);
     pair<airport, vector<pair<airport, double>>>* find(const airport& a1);
     
 };

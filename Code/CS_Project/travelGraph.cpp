@@ -8,6 +8,8 @@ using namespace std;
 #define PI 3.1415926535897932846
 #define EARTH_RADIUS_M 6372797.56085 // radius of Earth in m
 
+TravelGraph::TravelGraph(){}
+
 pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1) {
     for (unsigned i = 0; i < adjLists.size(); i++) {
         TravelGraph::airport a2 = adjLists.at(i).first;

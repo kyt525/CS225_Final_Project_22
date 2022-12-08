@@ -20,36 +20,31 @@ class TravelGraph {
 
     // airport struct
     struct airport {
+        //functions
         bool operator<(const airport& other);
         // bool operator==(airport& other);
         // bool operator <(const airport& air1, const airport& air2);
 
+        //variables
         int id;
         double latitude;
         double longitude;
-
         string city; // for trip planner
         string country; // for trip planner
     };
-
-    // // graph node
-    // struct node {
-    //     airport current;
-    //     airport* next;
-    //     double dist;
-    // };
 
     // member functions
     TravelGraph(); // constructor (makes a travel graph object)
     double distanceBetween(airport a1, airport a2) const;
     vector<airport> cleanAirportData(string fileInfo);
     vector<pair<int, int>> cleanRouteData(string fileInfo);
+    vector<pair<airport, vector<pair<airport, double>>>> getAdjLists();
+    vector<pair<airport, double>> getAdjacent(airport source);
 
     private:
+    // vector of pairs: in the pair, the first value is the source airport, and the second is a vector that 
+    // holds destination airports and their distances from the source.
     vector<pair<airport, vector<pair<airport, double>>>> adjLists;
-    
-    // vector<airport> cleanAirportData(string fileInfo);
-    // vector<pair<int, int>> cleanRouteData(string fileInfo);
     pair<airport, vector<pair<airport, double>>>* find(const airport& a1);
     
 };

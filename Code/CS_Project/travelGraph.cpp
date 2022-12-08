@@ -10,6 +10,7 @@ using namespace std;
 
 TravelGraph::TravelGraph(){}
 
+// privat function that works like map() find and returns the 
 pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1) {
     for (unsigned i = 0; i < adjLists.size(); i++) {
         TravelGraph::airport a2 = adjLists.at(i).first;
@@ -26,6 +27,13 @@ pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1
 //     return false;
 // }
 
+// bool TravelGraph::airport::operator <(const TravelGraph::airport& air1, const TravelGraph::airport& air2) {
+//     if (air1.id < air2.id) {
+//         return true;
+//     }
+//     return false;
+// }
+
 bool TravelGraph::airport::operator <(const TravelGraph::airport& other) {
     if (id < other.id) {
         return true;
@@ -33,12 +41,6 @@ bool TravelGraph::airport::operator <(const TravelGraph::airport& other) {
     return false;
 }
 
-// bool TravelGraph::airport::operator <(const TravelGraph::airport& air1, const TravelGraph::airport& air2) {
-//     if (air1.id < air2.id) {
-//         return true;
-//     }
-//     return false;
-// }
 
 TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     string fileInfo1 = file_to_string(airportData);
@@ -93,6 +95,15 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     
 }
 
+vector<pair<airport, vector<pair<airport, double>>>> TravelGraph::getAdjLists() {
+    return adjLists;
+}
+
+vector<pair<airport, double>> getAdjacent(TravelGraph::airport source) { 
+    return find(source)->second;
+}
+
+// helper function to find the distance between two airports: returns distance as a double
 double TravelGraph::distanceBetween(TravelGraph::airport a1, TravelGraph::airport a2) const {
     double lon = (a2.longitude * PI / 180) - (a1.longitude * PI / 180); // in radians
     double lat = (a2.latitude * PI / 180) - (a1.latitude * PI / 180); 
@@ -105,7 +116,7 @@ double TravelGraph::distanceBetween(TravelGraph::airport a1, TravelGraph::airpor
     return dist; 
 }
 
-// need to clean airport data by only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
+// cleaning airport data by only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
 // helper that returns vector of airports
 vector<TravelGraph::airport> TravelGraph::cleanAirportData(string fileInfo) {
     vector<TravelGraph::airport> airports;
@@ -147,7 +158,7 @@ vector<TravelGraph::airport> TravelGraph::cleanAirportData(string fileInfo) {
     return airports;
 }
 
-// need to clean routes data by only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops - only keeping direct flights i.e 0 stops)
+// cleaning routes data by only keeping the 4th (source airport ID), 6th (destination airport id), 8th (stops - only keeping direct flights i.e 0 stops)
 // helper that returns vector of airport id (int) pairs 
 vector<pair<int, int>> TravelGraph::cleanRouteData(string fileInfo) {
     vector<pair<int, int>> routes;

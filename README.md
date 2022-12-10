@@ -8,7 +8,7 @@ Repository Structure
 
 + All code can be found in the [Code/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code) folder
 
-+ Datasets are stored as csv files under [Tests/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code/CS_Project/tests)
++ Datasets are stored as csv files under [Data/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Data)
 
 + The development logs, team contract, etc can be found under [Documents/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Documents)
 

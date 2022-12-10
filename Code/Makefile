@@ -1,10 +1,7 @@
 CC = g++
 CFLAGS = -Wall -g -w
 
-output: main.o travelGraph.o tests.o utils.o
-	$(CC) $(CFLAGS) main.o travelGraph.o tests.o utils.o -o output
-
-test: catchmain.o tests.o travelGraph.o utils.o
+test: catchmain.o tests.o travelGraph.o shortestPath.o utils.o
 	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o shortestPath.o utils.o -o test
 
 catchmain.o: ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 

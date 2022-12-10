@@ -16,7 +16,7 @@ VP shortestPath(TravelGraph graph, TravelGraph::airport source, TravelGraph::air
 double betweennessCentrality(TravelGraph graph, TravelGraph::airport node) {
     // for all sources and destinations (where s != d != node), centrality is the ratio:
     // shortest paths containing node/ total shortest paths
-    vector<pair<TravelGraph::airport, VP>> adjLists = graph.getAdjLists;
+    vector<pair<TravelGraph::airport, VP>> adjLists = graph.getAdjLists();
     double nodeCount = 0; 
     double totalCount = 0;
 

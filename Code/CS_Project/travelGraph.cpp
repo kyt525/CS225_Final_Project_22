@@ -99,7 +99,7 @@ vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> T
     return adjLists;
 }
 
-vector<pair<TravelGraph::airport, double>> getAdjacent(TravelGraph::airport source) { 
+vector<pair<TravelGraph::airport, double>> TravelGraph::getAdjacent(TravelGraph::airport source) { 
     return find(source)->second;
 }
 

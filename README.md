@@ -19,6 +19,8 @@ Running Instructions
 ----------
 The user will be able to run our program by running `make test` followed by  `./main` where they will be allowed to change any of data they want. They also can see our test cases by running `./test`. All the functions are tested in both files.
 
+Within the [Test/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code/CS_Project/tests) folder the user can also see all the .csv files used to test our code. We have numerous test cases for each file used to test each function that can be switched out for each other in main. 
+
 Below we have listed the inputs and outputs for each function:
 -	ShortestPath (Dijkstra’s):
 	  -	Input: TravelGraph, source airport, and destination airport

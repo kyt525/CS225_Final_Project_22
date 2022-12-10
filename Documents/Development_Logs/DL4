@@ -1,0 +1,19 @@
+# Development Log (Date: 11/28/22 -- 12/02/22)
+
+## Weekly Goals
+We planned on finishing cleaning the data and storing it in the graph. We also planned to implement the BFS traversal and then finish the Makefile and simple test cases for testing the code we have written. We accomplished all of these tasks except the BFS traversal. 
+
+## Specific Tasks Completed (and by who)
+Neha: data parsing and cleaning,
+Frank: Makefile and testcases,
+Shriya: Makefile and helper functions,
+Kathryn: Testcases and GitHub
+
+## Problems Encountered 
+Initially, we could not get the overloading operator functions to work, so we switched from using a map to a vector to represent the airports. Then, we encountered a problem with the test cases, so we could not test the functions that we implemented yet.
+
+## Plans for next week
+We plan on testing the functions that we have implemented and finishing the implementations of the algorithms. 
+
+## Optional: Questions for mentor
+None for now. If we need, we will email our mentor.

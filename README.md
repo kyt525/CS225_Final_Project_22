@@ -7,9 +7,7 @@ Kathryn Thompson (kyt3),
 Neha Valvala (nehasv2),
 Shriya Surti (ssurt2)
 
-Project Proposal:
-
-Deliverables
+Repository Structure
 ------------
 
 + All code can be found in the [Code/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code)
@@ -18,4 +16,4 @@ Deliverables
 
 + The project report, development logs, team contract, etc can be found under [Documents/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Documents)
 
-+ The final presentation and project report can be found under the [Final Deliverables/](insert link)
++ The final presentation and project report can be found under the [Final Deliverables/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Final%20Deliverables)

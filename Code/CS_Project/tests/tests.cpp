@@ -54,48 +54,35 @@ int correctDistance(double &distance, const double &answer){
     return 0;
 }
 
-// TEST_CASE("read data medium") {
-//     vector<TravelGraph::airport> data = cleanAirportData("../tests/medium_airport_test.csv");
+TEST_CASE("read data medium") {
+    TravelGraph g;
+    vector<TravelGraph::airport> data = g.cleanAirportData("../tests/medium_airport_test.csv");
 
-//     const vector<vector<string>> answer = {{"21","Sault Sainte Marie","Canada","46.48500061035156","-84.5093994140625"},\
-//         {"22","Winnipeg","Canada","50.0564002991","-97.03250122070001"},\
-//         {"23","Halifax","Canada","44.639702","-63.499401"},\
-//         {"24","St. Anthony","Canada","51.3918991089","-56.083099365200006"},\
-//         {"25","Tofino","Canada","49.079833","-125.775583"},\
-//         {"26","Pelly Bay","Canada","68.534401","-89.808098"},\
-//         {"27","Baie Comeau","Canada","49.13249969482422","-68.20439910888672"},\
-//         {"28","Bagotville","Canada","48.33060073852539","-70.99639892578125"},\
-//         {"29","Baker Lake","Canada","64.29889678960001","-96.077796936"},\
-//         {"30","Campbell River","Canada","49.950801849365234","-125.27100372314453"},\
-//         {"31","Brandon","Canada","49.91","-99.951897"},\
-//         {"32","Cambridge Bay","Canada","69.1081008911","-105.138000488"},\
-//         {"33","Nanaimo","Canada","49.054970224899996","-123.869862556"},\
-//         {"34","Castlegar","Canada","49.2963981628","-117.632003784"},\
-//         {"35","Chatham","Canada","47.007801","-65.449203"},\
-//         {"36","Charlo","Canada","47.990799","-66.330299"},\
-//         {"37","Coppermine","Canada","67.816704","-115.143997"},\
-//         {"38","Coronation","Canada","52.0750007629","-111.444999695"},\
-//         {"39","Chilliwack","Canada","49.1528015137","-121.939002991"},\
-//         {"40","Clyde River","Canada","70.4860992432","-68.5167007446"}
-//         };
+    const vector<vector<string>> answer = {
+        {"21","Sault Sainte Marie","Canada","46.48500061035156","-84.5093994140625"},\
+        {"22","Winnipeg","Canada","50.0564002991","-97.03250122070001"},\
+        {"23","Halifax","Canada","44.639702","-63.499401"},\
+        {"24","St. Anthony","Canada","51.3918991089","-56.083099365200006"},\
+        {"25","Tofino","Canada","49.079833","-125.775583"},\
+        {"26","Pelly Bay","Canada","68.534401","-89.808098"},\
+        {"27","Baie Comeau","Canada","49.13249969482422","-68.20439910888672"},\
+        {"28","Bagotville","Canada","48.33060073852539","-70.99639892578125"},\
+        {"29","Baker Lake","Canada","64.29889678960001","-96.077796936"},\
+        {"30","Campbell River","Canada","49.950801849365234","-125.27100372314453"},\
+        {"31","Brandon","Canada","49.91","-99.951897"},\
+        {"32","Cambridge Bay","Canada","69.1081008911","-105.138000488"},\
+        {"33","Nanaimo","Canada","49.054970224899996","-123.869862556"},\
+        {"34","Castlegar","Canada","49.2963981628","-117.632003784"},\
+        {"35","Chatham","Canada","47.007801","-65.449203"},\
+        {"36","Charlo","Canada","47.990799","-66.330299"},\
+        {"37","Coppermine","Canada","67.816704","-115.143997"},\
+        {"38","Coronation","Canada","52.0750007629","-111.444999695"},\
+        {"39","Chilliwack","Canada","49.1528015137","-121.939002991"},\
+        {"40","Clyde River","Canada","70.4860992432","-68.5167007446"}
+        };
 
-//     correctAirports(data, answer);
-
-//     // V2D students = file_to_V2D("../tests/data/c5_s10_3_students.csv");
-
-//     // const V2D answer = {
-//     //     {"JydY", "CS577"}, \
-//     //     {"MnWd", "CS577", "CS500", "CS395"}, \
-//     //     {"tnkL", "CS577", "CS591"}, \
-//     //     {"gpDS", "CS591", "CS395"}, \
-//     //     {"94Ol", "CS591"}, \
-//     //     {"SjC0", "CS386"}, \
-//     //     {"EYge", "CS386", "CS500", "CS395"}, \
-//     //     {"Nvu1", "CS386"}, \
-//     //     {"uAcT", "CS500"}
-//     //     };
-//     // REQUIRE(students == answer);
-// }
+    correctAirports(data, answer);
+}
 
 TEST_CASE("distanceBetween() test1") {
 
@@ -128,57 +115,53 @@ TEST_CASE("read route_small"){
     correctRoutes(routes, answer);
 }
 
-// TEST_CASE("read route_medium"){
-//
-// vector<vector<int>> data = cleanRouteData("../tests/medium_route_test.csv");
-// 
-// vector<vector<int>> answer = {{6156,2990},\
-// {2922,6969},\
-// {2952,6156},\
-// {2990,2965},\
-// {2990,2966},\
-// {2990,2968},\
-// {2990,4029},\
-// {2990,6156},\
-// {990,2948},\
-// {2990,2975},\
-// {2948,2990},\
-// {2948,6969},\
-// {2948,6160},\
-// {2962,2966},\
-// {6969,4029},\
-// {6969,2922},\
-// {6969,2948},\
-// {6969,2975},\
-// {2972,2975},\
-// {2972,6160}
-// };
+TEST_CASE("read route_medium"){
+    TravelGraph g;
+    vector<pair<int, int>> routes = g.cleanRouteData("../tests/medium_route_test.csv");
 
-// REQUIRE(data == answer);
-// }
+    vector<vector<int>> answer = {
+        {6156,2990},\
+        {2922,6969},\
+        {2952,6156},\
+        {2990,2965},\
+        {2990,2966},\
+        {2990,2968},\
+        {2990,4029},\
+        {2990,6156},\
+        {990,2948},\
+        {2990,2975},\
+        {2948,2990},\
+        {2948,6969},\
+        {2948,6160},\
+        {2962,2966},\
+        {6969,4029},\
+        {6969,2922},\
+        {6969,2948},\
+        {6969,2975},\
+        {2972,2975},\
+        {2972,6160}
+    };
+    correctRoutes(routes, answer);
 
-// TEST_CASE("read airport_medium"){
+}
 
-// const vector<vector<string>> answer = { 
-// {"21","Sault Sainte Marie","Canada","46.48500061035156","-84.5093994140625"}
-// {"22","Winnipeg","Canada","50.0564002991","-97.03250122070001"}
-// {"23","Halifax","Canada","44.639702","-63.499401"}
-// {"24","St. Anthony","Canada","51.3918991089","-56.083099365200006"}
-// {"25","Tofino","Canada","49.079833","-125.775583"}
-// {"26","Pelly Bay","Canada","68.534401","-89.808098"}
-// {"27","Baie Comeau","Canada","49.13249969482422","-68.20439910888672"}
-// {"28","Bagotville","Canada","48.33060073852539","-70.99639892578125"}
-// {"29","Baker Lake","Canada","64.29889678960001","-96.077796936"}
-// {"30","Campbell River","Canada","49.950801849365234","-125.27100372314453"}
-// {"31","Brandon","Canada","49.91","-99.951897"}
-// {"32","Cambridge Bay","Canada","69.1081008911","-105.138000488"}
-// {"33","Nanaimo","Canada","49.054970224899996","-123.869862556"}
-// {"34","Castlegar","Canada","49.2963981628","-117.632003784"}
-// {"35","Chatham","Canada","47.007801","-65.449203"}
-// {"36","Charlo","Canada","47.990799","-66.330299"}
-// {"37","Coppermine","Canada","67.816704","-115.143997"}
-// {"38","Coronation","Canada","52.0750007629","-111.444999695"}
-// {"39","Chilliwack","Canada","49.1528015137","-121.939002991"}
-// {"40","Clyde River","Canada","70.4860992432","-68.5167007446"}
-// }
-// }
+
+
+TEST_CASE("BFS Test"){
+    TravelGraph g;
+
+
+}
+
+TEST_CASE("Shortest Path Test"){
+    TravelGraph g;
+
+
+}
+
+TEST_CASE("getCentrality Test"){
+    TravelGraph g;
+
+
+}
+

@@ -95,11 +95,11 @@ TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     
 }
 
-vector<pair<airport, vector<pair<airport, double>>>> TravelGraph::getAdjLists() {
+vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> TravelGraph::getAdjLists() {
     return adjLists;
 }
 
-vector<pair<airport, double>> getAdjacent(TravelGraph::airport source) { 
+vector<pair<TravelGraph::airport, double>> getAdjacent(TravelGraph::airport source) { 
     return find(source)->second;
 }
 

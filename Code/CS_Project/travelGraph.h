@@ -15,7 +15,6 @@ using namespace std;
 
 class TravelGraph {
     public:
-    //TravelGraph();
     TravelGraph(const string& airportData, const string& routeData); // input data files
 
     // airport struct

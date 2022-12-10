@@ -5,7 +5,7 @@ output: main.o travelGraph.o tests.o utils.o
 	$(CC) $(CFLAGS) main.o travelGraph.o tests.o utils.o -o output
 
 test: catchmain.o tests.o travelGraph.o utils.o
-	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o utils.o -o test
+	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o shortestPath.o utils.o -o test
 
 catchmain.o: ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 
 	$(CC) $(CFLAGS) -c ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 
@@ -18,6 +18,9 @@ main.o: CS_Project/main.cpp
 
 travelGraph.o: CS_Project/travelGraph.cpp CS_Project/travelGraph.h
 	$(CC) $(CFLAGS) -c CS_Project/travelGraph.cpp
+
+shortestPath.o: CS_Project/shortestPath.h CS_Project/shortestPath.cpp
+	$(CC) $(CFLAGS) -c CS_Project/shortestPath.cpp
 
 utils.o: CS_Project/utils.cpp CS_Project/utils.h
 	$(CC) $(CFLAGS) -c CS_Project/utils.cpp

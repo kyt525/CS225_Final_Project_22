@@ -12,10 +12,10 @@ Project Proposal:
 Deliverables
 ------------
 
-+ [All code can be found in the ][Code\]
++ All code can be found in the [Code/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code)
 
-+ [Datasets are stored as txt files under ][Data\]
++ Datasets are stored as csv files under [tests/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code/CS_Project/tests)
 
-+ [The project report, development logs, team contract, etc can be found under ][Documents\]
++ The project report, development logs, team contract, etc can be found under [Documents/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Documents)
 
-+ [The final presentation and project report can be found under the ][Final Deliverables\]
++ The final presentation and project report can be found under the [Final Deliverables/](insert link)

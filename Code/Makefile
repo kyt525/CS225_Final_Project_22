@@ -1,6 +1,9 @@
 CC = g++
 CFLAGS = -Wall -g -w
 
+main: main.o travelGraph.o shortestPath.o utils.o
+	$(CC) $(CFLAGS) main.o travelGraph.o shortestPath.o utils.o -o main
+
 test: catchmain.o tests.o travelGraph.o shortestPath.o utils.o
 	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o shortestPath.o utils.o -o test
 

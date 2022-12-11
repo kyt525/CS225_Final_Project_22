@@ -21,8 +21,6 @@ class TravelGraph {
     struct airport {
         //functions
         bool operator<(const airport& other);
-        // bool operator==(airport& other);
-        // bool operator <(const airport& air1, const airport& air2);
 
         //variables
         int id;
@@ -35,7 +33,7 @@ class TravelGraph {
     // member functions
     TravelGraph(); // constructor (makes a travel graph object)
     double distanceBetween(airport a1, airport a2) const;
-    vector<airport> cleanAirportData(string fileInfo);
+    vector<airport> cleanAirportData(const string& fileInfo);
     vector<pair<int, int>> cleanRouteData(string fileInfo);
     vector<pair<airport, vector<pair<airport, double>>>> getAdjLists();
     vector<pair<airport, double>> getAdjacent(airport source);

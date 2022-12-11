@@ -15,6 +15,8 @@ using namespace std;
 // test to see whether the airports data are properly stored and cleaned
 // 0 - data cleaned, 1 - size, 2 - id, 3 - city, 4 - country, 5 - latitude, 6 - longitude
 int correctAirports(const vector<TravelGraph::airport>& airports, const vector<vector<string>>& answer) {
+
+
     if(airports.size() != answer.size())
         return 1;
         
@@ -36,6 +38,7 @@ int correctAirports(const vector<TravelGraph::airport>& airports, const vector<v
 // test to see whether the routes data are properly stored and cleaned
 // 0 - data cleaned, 1 - size, 2 - latitude, 3 - longitude
 int correctRoutes(const vector<pair<int, int>>& routes, const vector<vector<int>>& answer) {
+    
     if(routes.size() != answer.size())
         return 1;
         
@@ -49,15 +52,35 @@ int correctRoutes(const vector<pair<int, int>>& routes, const vector<vector<int>
 }
 
 int correctDistance(double &distance, const double &answer){
-    if(distance != answer)
+    if(distance > answer + 1 || distance < answer - 1) // adding buffer to online distance calculated vs our formula
         return 1;
     return 0;
 }
+// TEST_CASE("airport data small"){
+//     TravelGraph g;
+//     vector<TravelGraph::airport> data = g.cleanAirportData("../tests/small_airport_test.csv");
 
-TEST_CASE("read data medium") {
+//     const vector<vector<string>> answer = {
+//         {"1","Goroka","Papua New Guinea",-6.081689834590001,145.391998291,5282,10}, \
+//         {"2","Madang","Papua New Guinea",-5.20707988739,145.789001465,20,10}, \
+//         {"3","Mount Hagen","Papua New Guinea",-5.826789855957031,144.29600524902344,5388,10}, \
+//         {"4","Nadzab","Papua New Guinea",-6.569803,146.725977,239,10}, \
+//         {"5","Port Moresby","Papua New Guinea",-9.443380355834961,147.22000122070312,146,10}, \
+//         {"6","Wewak","Papua New Guinea",-3.58383011818,143.669006348,19,10}, \
+//         {"7","Narssarssuaq","Greenland",61.1604995728,-45.4259986877,112,-3}, \
+//         {"8","Godthaab","Greenland",64.19090271,-51.6781005859,283,-3}, \
+//         {"9","Sondrestrom","Greenland",67.0122218992,-50.7116031647,165,-3}, \
+//         {"10","Thule","Greenland",76.5311965942,-68.7032012939,251,-4} \
+//     }
+//     REQUIRE(correctAirports(data, answer) == 0);
+// }
+
+TEST_CASE("airport data medium") {
     TravelGraph g;
-    vector<TravelGraph::airport> data = g.cleanAirportData("../tests/medium_airport_test.csv");
-
+    string fileInfo = file_to_string("../tests/medium_airport_test.csv");
+    vector<TravelGraph::airport> data = g.cleanAirportData(fileInfo);
+     cout<< "data.at(i).id" << endl;
+    
     const vector<vector<string>> answer = {
         {"21","Sault Sainte Marie","Canada","46.48500061035156","-84.5093994140625"},\
         {"22","Winnipeg","Canada","50.0564002991","-97.03250122070001"},\
@@ -81,7 +104,7 @@ TEST_CASE("read data medium") {
         {"40","Clyde River","Canada","70.4860992432","-68.5167007446"}
         };
 
-    correctAirports(data, answer);
+    REQUIRE(correctAirports(data, answer) == 0);
 }
 
 TEST_CASE("distanceBetween() test1") {
@@ -91,10 +114,9 @@ TEST_CASE("distanceBetween() test1") {
 
     TravelGraph g;
     double distance = g.distanceBetween(a1, a2);
+    const double correct_distance = 2004.93;
 
-    const double correct_distance = 2010.8909946870748;
-
-    correctDistance(distance, correct_distance);
+    REQUIRE(correctDistance(distance, correct_distance) == 0);
 }
 
 TEST_CASE("read route_small"){
@@ -112,7 +134,7 @@ TEST_CASE("read route_small"){
         {4029,6160}, \ 
         {6156,2952}, \
     };
-    correctRoutes(routes, answer);
+    REQUIRE(correctRoutes(routes, answer) == 0);
 }
 
 TEST_CASE("read route_medium"){
@@ -141,27 +163,27 @@ TEST_CASE("read route_medium"){
         {2972,2975},\
         {2972,6160}
     };
-    correctRoutes(routes, answer);
+    REQUIRE(correctRoutes(routes, answer) == 0);
 
 }
 
 
 
-TEST_CASE("BFS Test"){
-    TravelGraph g;
+// TEST_CASE("BFS Test"){
+//     TravelGraph g;
 
 
-}
+// }
 
-TEST_CASE("Shortest Path Test"){
-    TravelGraph g;
-
-
-}
-
-TEST_CASE("getCentrality Test"){
-    TravelGraph g;
+// TEST_CASE("Shortest Path Test"){
+//     TravelGraph g;
 
 
-}
+// }
+
+// TEST_CASE("getCentrality Test"){
+//     TravelGraph g;
+
+
+// }
 

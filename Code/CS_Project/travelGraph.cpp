@@ -20,20 +20,6 @@ pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1
     }
 }
 
-// bool TravelGraph::airport::operator==(airport& other) {
-//     if ((id == other.id) && (latitude == other.latitude) && (longitude == other.longitude) && (city == other.city) && (country == other.country)) {
-//         return true;
-//     }
-//     return false;
-// }
-
-// bool TravelGraph::airport::operator <(const TravelGraph::airport& air1, const TravelGraph::airport& air2) {
-//     if (air1.id < air2.id) {
-//         return true;
-//     }
-//     return false;
-// }
-
 bool TravelGraph::airport::operator <(const TravelGraph::airport& other) {
     if (id < other.id) {
         return true;
@@ -118,11 +104,11 @@ double TravelGraph::distanceBetween(TravelGraph::airport a1, TravelGraph::airpor
 
 // cleaning airport data by only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 13th (type)
 // helper that returns vector of airports
-vector<TravelGraph::airport> TravelGraph::cleanAirportData(string fileInfo) {
+vector<TravelGraph::airport> TravelGraph::cleanAirportData(const string& fileInfo) {
     vector<TravelGraph::airport> airports;
     vector<string> entries; // airport entries: each entry is a string with airport details separated by commas
-    
     int numRows = SplitString(fileInfo, '\n', entries);
+
     for (int row = 0; row < numRows; row++) {
         TravelGraph::airport a; // each entry = details of an airport
         bool validAirport = true;
@@ -132,27 +118,31 @@ vector<TravelGraph::airport> TravelGraph::cleanAirportData(string fileInfo) {
         for (int col = 0; col < numCols; col++) {
             string detail = Trim(details.at(col));
             // only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 12th (type)
-            if (col == 0) 
+            if (col == 0) {
+                std::cout << detail << std::endl;
                 a.id = stoi(detail);
+                }
 
-            else if (col == 2) 
+            else if (col == 2) {
                 a.city = detail;
+                }
 
-            else if (col == 3) 
+            else if (col == 3) {
                 a.country = detail;
-
+            }
             else if (col == 6)
                 a.latitude = stod(detail);
 
             else if (col == 7)
                 a.longitude = stod(detail);
 
-            else if ((col == 12) && (detail != "airport"))
+            else if ((col == 12) && (detail != "\"airport\"")){
                 validAirport = false;
+                }
         }
 
-        if (validAirport) 
-            airports.push_back(a);
+        if (validAirport) {
+            airports.push_back(a);}
     }
     
     return airports;

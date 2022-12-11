@@ -124,27 +124,35 @@ vector<TravelGraph::airport> TravelGraph::cleanAirportData(const string& fileInf
                 }
 
             else if (col == 2) {
+                std::cout << detail << std::endl;
                 a.city = detail;
                 }
 
             else if (col == 3) {
+                std::cout << detail << std::endl;
                 a.country = detail;
             }
-            else if (col == 6)
+            else if (col == 6){
+                std::cout << detail << std::endl;
                 a.latitude = stod(detail);
+                }
 
-            else if (col == 7)
-                a.longitude = stod(detail);
+            else if (col == 7){
+                std::cout << detail << std::endl;
+                a.longitude = stod(detail);}
 
             else if ((col == 12) && (detail != "\"airport\"")){
+                std::cout << detail << std::endl;
                 validAirport = false;
                 }
         }
 
         if (validAirport) {
-            airports.push_back(a);}
+            std::cout << "detail" << std::endl;
+            airports.push_back(a);
+            std::cout << "detail2" << std::endl;}
     }
-    
+    std::cout << "detail" << std::endl;
     return airports;
 }
 
@@ -164,14 +172,17 @@ vector<pair<int, int>> TravelGraph::cleanRouteData(string fileInfo) {
         for (int col = 0; col < numCols; col++) {
             string detail = Trim(details.at(col));
             // only keeping the 3th (source airport ID), 5th (destination airport id), 7th (stops)
-            if (col == 3)
-                route.first = stoi(detail);
+            if (col == 3 && detail != "\\N"){
+                std::cout << detail << std::endl;
+                route.first = stoi(detail);}
 
-            else if (col == 5)
-                route.second = stoi(detail);
+            else if (col == 5 && detail != "\\N") {
+            std::cout << detail << std::endl;
+                route.second = stoi(detail);}
 
-            else if ((col == 7) && (stoi(detail) != 0))
-                validRoute = false;
+            else if ((col == 7) && (stoi(detail) != 0)) {
+            std::cout << detail << std::endl;
+                validRoute = false;}
         }//if no destination airport ID then delete entry
 
         if (validRoute)

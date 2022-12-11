@@ -12,7 +12,7 @@ pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>* BFS::fin
     }
 }
 
-vector<int> BFS::allAirports(TravelGraph graph, TravelGraph::airport source) {
+vector<int> BFS::allAirports(TravelGraph::airport source) {
     // get the adjacency list from the graph
     vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> adj = graph.getAdjLists();
     // get the number of vertices

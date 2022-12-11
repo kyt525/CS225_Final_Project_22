@@ -119,40 +119,31 @@ vector<TravelGraph::airport> TravelGraph::cleanAirportData(const string& fileInf
             string detail = Trim(details.at(col));
             // only keeping the 0th (airport ID), 2nd (city), 3rd (country), 6th (latitude), 7th (longitude), 12th (type)
             if (col == 0) {
-                std::cout << detail << std::endl;
                 a.id = stoi(detail);
                 }
 
             else if (col == 2) {
-                std::cout << detail << std::endl;
                 a.city = detail;
                 }
 
             else if (col == 3) {
-                std::cout << detail << std::endl;
                 a.country = detail;
             }
             else if (col == 6){
-                std::cout << detail << std::endl;
                 a.latitude = stod(detail);
                 }
 
             else if (col == 7){
-                std::cout << detail << std::endl;
                 a.longitude = stod(detail);}
 
             else if ((col == 12) && (detail != "\"airport\"")){
-                std::cout << detail << std::endl;
                 validAirport = false;
                 }
         }
 
         if (validAirport) {
-            std::cout << "detail" << std::endl;
-            airports.push_back(a);
-            std::cout << "detail2" << std::endl;}
+            airports.push_back(a);}
     }
-    std::cout << "detail" << std::endl;
     return airports;
 }
 

@@ -56,30 +56,30 @@ int correctDistance(double &distance, const double &answer){
         return 1;
     return 0;
 }
-// TEST_CASE("airport data small"){
-//     TravelGraph g;
-//     vector<TravelGraph::airport> data = g.cleanAirportData("../tests/small_airport_test.csv");
 
-//     const vector<vector<string>> answer = {
-//         {"1","Goroka","Papua New Guinea",-6.081689834590001,145.391998291,5282,10}, \
-//         {"2","Madang","Papua New Guinea",-5.20707988739,145.789001465,20,10}, \
-//         {"3","Mount Hagen","Papua New Guinea",-5.826789855957031,144.29600524902344,5388,10}, \
-//         {"4","Nadzab","Papua New Guinea",-6.569803,146.725977,239,10}, \
-//         {"5","Port Moresby","Papua New Guinea",-9.443380355834961,147.22000122070312,146,10}, \
-//         {"6","Wewak","Papua New Guinea",-3.58383011818,143.669006348,19,10}, \
-//         {"7","Narssarssuaq","Greenland",61.1604995728,-45.4259986877,112,-3}, \
-//         {"8","Godthaab","Greenland",64.19090271,-51.6781005859,283,-3}, \
-//         {"9","Sondrestrom","Greenland",67.0122218992,-50.7116031647,165,-3}, \
-//         {"10","Thule","Greenland",76.5311965942,-68.7032012939,251,-4} \
-//     }
-//     REQUIRE(correctAirports(data, answer) == 0);
-// }
+TEST_CASE("airport data small"){
+    TravelGraph g;
+    vector<TravelGraph::airport> data = g.cleanAirportData("../tests/small_airport_test.csv");
+
+    const vector<vector<string>> answer = {
+        {"1","Goroka","Papua New Guinea","-6.081689834590001","145.391998291"}, \
+        {"2","Madang","Papua New Guinea","-5.20707988739","145.789001465"}, \
+        {"3","Mount Hagen","Papua New Guinea","-5.826789855957031","144.29600524902344"}, \
+        {"4","Nadzab","Papua New Guinea","-6.569803","146.725977"}, \
+        {"5","Port Moresby","Papua New Guinea","-9.443380355834961","147.22000122070312",146,10}, \
+        {"6","Wewak","Papua New Guinea","-3.58383011818"",143.669006348"}, \
+        {"7","Narssarssuaq","Greenland","61.1604995728","-45.4259986877"}, \
+        {"8","Godthaab","Greenland","64.19090271","-51.6781005859"}, \
+        {"9","Sondrestrom","Greenland","67.0122218992","-50.7116031647",165,-3}, \
+        {"10","Thule","Greenland","76.5311965942","-68.7032012939"} \
+    }
+    REQUIRE(correctAirports(data, answer) == 0);
+}
 
 TEST_CASE("airport data medium") {
     TravelGraph g;
     string fileInfo = file_to_string("../tests/medium_airport_test.csv");
     vector<TravelGraph::airport> data = g.cleanAirportData(fileInfo);
-     cout<< "data.at(i).id" << endl;
     
     const vector<vector<string>> answer = {
         {"21","Sault Sainte Marie","Canada","46.48500061035156","-84.5093994140625"},\

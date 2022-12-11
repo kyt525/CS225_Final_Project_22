@@ -1,6 +1,6 @@
 #include "shortestPath.h"
 
-double shortestDistance(VP shortestPath) {
+double shortestPath::shortestDistance(VP shortestPath) {
     double dist = 0;
     for (unsigned i = 0; i < shortestPath.size(); i++) {
         dist += shortestPath.at(i).second;
@@ -8,59 +8,81 @@ double shortestDistance(VP shortestPath) {
     return dist;
 }
 
-VP shortestPath(TravelGraph graph, TravelGraph::airport source, TravelGraph::airport destination) {
-   VP distances;                       //return vector
-   vector<TravelGraph::airport> v;                 //vector for airports
-    vector<double> dist;                //vector for distances FROM SOURCE
-    //bool found = false;
-    priority_queue<pair<double, TravelGraph::airport>> Q;
-    //double distance;
+//shortestPath:
+//
+VP shortestPath::Dijkastra(TravelGraph graph, TravelGraph::airport source, TravelGraph::airport destination) {
+    VP distances;
+    vector<TravelGraph::airport> v;                 //vector for airports
+    vector<double> dist;  
+    priority_queue<pair<double, TravelGraph::airport>, vector<pair<double, TravelGraph::airport>>, greater<pair<double, TravelGraph::airport>>> Q;
+    bool found = false;
+
     vector<pair<TravelGraph::airport, VP>> adjlist = graph.getAdjLists();
-    for (int i = 0; i < adjlist.size(); i++){       //iterate through all the airports on the graph
-        if (adjlist[i].first.id != source.id){
+    vector<pair<TravelGraph::airport, double>> adj;
+    int l = 0;
+    for (unsigned i = 0; i < adjlist.size(); i++){
+        adj = graph.getAdjacent(source);
+        if (adj[l].first.id == i){
+            v.push_back(source);                //airport = null
+            dist.push_back(adj[l].second);
+            pair<double, TravelGraph::airport> abc(dist[i], TravelGraph::airport());
+            //Q.push(abc);
+
+            //Q.push(make_pair(dist[i],adj[l].first));
+            l++;
+        }
+        else if(i == source.id){
+            v.push_back(TravelGraph::airport());
+            dist.push_back(0);
+            pair<double, TravelGraph::airport> abc(dist[i], TravelGraph::airport());
+            //Q.push(abc);
+            //Q.push(make_pair(dist[i],TravelGraph::airport()));
+        }
+        else{
             v.push_back(TravelGraph::airport());                //airport = null
-            dist.push_back(-1);             //distance = infinity
-        }//distances.push_back(vertex);
-        Q.push(make_pair(graph.distanceBetween(source, adjlist[i].first), adjlist[i].first));
+            dist.push_back(-1);
+        } 
     }
-    dist[0] = 0;                        //source airport dist = 0
-    v[0] = source;                      //source airport = source
 
-    //TravelGraph path;
-    pair<double, TravelGraph::airport> temp = Q.top();
-    Q.pop();    //pop the source airport
-    bool valid_step;
+    pair<double, TravelGraph::airport> prev = Q.top();
     pair<double, TravelGraph::airport> step;
-    while(!Q.empty() && step.second.id != destination.id){
-        step = Q.top();
-        vector<pair<TravelGraph::airport, double>> adj = graph.getAdjacent(temp.second);
-        valid_step = false;
-        int i;
-        for (i = 0; i < adj.size(); i++)
-            if (step.second.id == adj[i].first.id) {
-                valid_step = true;
-                break;
-            }
-        if (valid_step){
-            distances.push_back(adj[i]);
-            temp = step;
-        }
-        double x;
-        for (int j = 0; j < adj.size(); j++){
-            x = adj[j].second + step.first;
-            if (x < dist[step.second.id] && dist[step.second.id] != -1){
-                dist[step.second.id] = x;
-                v[step.second.id] = temp.second;
-            }
-        }
-        Q.pop();
-    }
-    return distances;
+    double distance;
 
+    Q.pop();
+
+    while(!Q.empty()){
+        step = Q.top();
+        
+        if(step.second.id == destination.id) 
+            found = true;
+    
+        adj.clear();
+        adj = graph.getAdjacent(step.second);
+        for (int i = 0; i < adj.size(); i++){
+            //v[adj[i].first.id] = step.second;
+            distance = step.first + adj[i].second;
+            Q.push(make_pair(distance,adj[i].first));
+            if (dist[adj[i].first.id] == -1 || distance < dist[adj[i].first.id]){
+                dist[adj[i].first.id] = distance;
+                v[adj[i].first.id] = prev.second;
+            }
+        }   
+        if (found)
+            break;   
+        else prev = step;    
+    }
+    distances.push_back(make_pair(destination,dist[destination.id] - dist[v[destination.id].id]));
+    int temp_airport = destination.id;
+    while(temp_airport != source.id){
+        distances.push_back(make_pair(*(graph.find(temp_airport)).first, dist[temp_airport] - dist[v[temp_airport].id]));
+        temp_airport = v[temp_airport].id;
+    }
+    reverse(distances.begin(),distances.end());
+    return distances;
 }
 
 
-double betweennessCentrality(TravelGraph graph, TravelGraph::airport node) {
+double shortestPath::betweennessCentrality(TravelGraph graph, TravelGraph::airport node) {
     // for all sources and destinations (where s != d != node), centrality is the ratio:
     // shortest paths containing node/ total shortest paths
     vector<pair<TravelGraph::airport, VP>> adjLists = graph.getAdjLists();
@@ -77,7 +99,7 @@ double betweennessCentrality(TravelGraph graph, TravelGraph::airport node) {
             if (node.id == dest.id || source.id == dest.id) {
                 continue;
             }
-            VP path = shortestPath(graph, source, dest);
+            VP path = shortestPath::shortestPath(graph, source, dest);
             for (unsigned k = 0; k < path.size(); k++) {
                 if (path.at(k).first.id == node.id) {
                     nodeCount++;

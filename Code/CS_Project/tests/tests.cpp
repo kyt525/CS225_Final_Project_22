@@ -7,6 +7,8 @@
 #include <utility>
 
 #include "../travelGraph.h"
+#include "../shortestPath.h"
+#include "../BFS.h"
 #include "../utils.h"
 
 
@@ -186,7 +188,7 @@ TEST_CASE("shortest path"){
     string routeData = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/shortest_path_routes.csv");
     
     TravelGraph graph = TravelGraph(airportData, routeData);
-    ShortestPath sp = ShortestPath();
+    shortestPath sp = shortestPath();
 
     TravelGraph::airport source1 = graph.find(1)->first;
     TravelGraph::airport dest1 = graph.find(3)->first;
@@ -195,7 +197,7 @@ TEST_CASE("shortest path"){
         {intermediate, graph.distanceBetween(source1,intermediate)}, \
         {dest1, graph.distanceBetween(intermediate,dest1)}
         };
-    VP pathVector1 = sp.shortestPath(graph, source1, dest1);
+    VP pathVector1 = sp.Dijkastra(graph, source1, dest1);
     bool unbroken = true;
     for (unsigned i = 0; i < answer1.size(); i++) {
         pair<TravelGraph::airport, double> p1 = answer1.at(i);
@@ -211,10 +213,10 @@ TEST_CASE("shortest path"){
 TEST_CASE("BFS Test"){
     string airports = "/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/stick_graph_airport.csv";
     string routes = "/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/stick_graph_route.csv";
-    TravelGraph g(airports, routes);
+    TravelGraph g = TravelGraph(airports, routes);
 
     vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> adj = g.getAdjLists();
-    BFS bfs(adj);
+    BFS bfs = BFS(adj);
 
     TravelGraph::airport source;
     source.id = 2965;
@@ -223,16 +225,3 @@ TEST_CASE("BFS Test"){
     vector<int> answer = {2965, 2979, 3093, 3042, 3131};
     REQUIRE(result == answer);
 }
-
-// TEST_CASE("Shortest Path Test"){
-//     TravelGraph g;
-
-
-// }
-
-// TEST_CASE("getCentrality Test"){
-//     TravelGraph g;
-
-
-// }
-

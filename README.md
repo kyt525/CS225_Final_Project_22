@@ -1,18 +1,18 @@
-# Open Flights
+# Trip Planner
 CS225 Data Structures and Algorithms Final Project 
 
-
+[Final Presentation Link](https://youtu.be/us6oQL8XI3k)
 
 Repository Structure
 ------------
 
-+ All code can be found in the [Code/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code) folder
++ All code can be found in the [Code/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code) folder under [CS_Project/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Code/CS_Project)
 
 + Datasets are stored as csv files under [Data/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Data)
 
 + The development logs, team contract, etc can be found under [Documents/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Documents)
 
-+ The final presentation, project report, and final results can be found under the [Final Deliverables/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Final%20Deliverables)
++ The final presentation slides and Results.md can be found under the [Final Deliverables/](https://github.com/kyt525/CS225_Final_Project_22/tree/main/Final%20Deliverables)
 
 
 Running Instructions
@@ -40,12 +40,3 @@ Frank Lu (yuzhelu2),
 Kathryn Thompson (kyt3),
 Neha Valvala (nehasv2),
 Shriya Surti (ssurt2)
-
-
-"The README clearly and succintly describes the following:
-
-The linkage and location of all major code, data, results, and deliverable files.
-
-The necessary commands to run the assignment are well described and include instructions for selecting the input dataset and output location
-
-The test suite is well described and instructions on how to reproduce the tests are provided."

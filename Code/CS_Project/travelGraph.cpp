@@ -10,7 +10,7 @@ using namespace std;
 
 TravelGraph::TravelGraph(){}
 
-// privat function that works like map() find and returns the 
+// private function that works like map() find and returns a pointer to the airport within the adjacency list
 pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1) {
     for (unsigned i = 0; i < adjLists.size(); i++) {
         TravelGraph::airport a2 = adjLists.at(i).first;
@@ -20,13 +20,25 @@ pair<TravelGraph::airport, VP>* TravelGraph::find(const TravelGraph::airport& a1
     }
 }
 
-bool TravelGraph::airport::operator <(const TravelGraph::airport& other) {
-    if (id < other.id) {
-        return true;
+//private function that finds the airport within the adjacency list based on an index
+pair<TravelGraph::airport, VP>* TravelGraph::find(const int& a1) {
+    for (unsigned i = 0; i < adjLists.size(); i++) {
+        TravelGraph::airport a2 = adjLists.at(i).first;
+        if (a1 == a2.id) {
+            return &adjLists.at(i);
+        }
     }
-    return false;
 }
 
+// bool TravelGraph::airport::operator <(const TravelGraph::airport& other) {
+//     if (id < other.id) {
+//         return true;
+//     }
+//     return false;
+// }
+
+//constructor that uses the cleaning data helper functions
+//to return a adjacency list storing the airports and the distance between source and destination
 
 TravelGraph::TravelGraph(const string& airportData, const string& routeData) {
     string fileInfo1 = file_to_string(airportData);

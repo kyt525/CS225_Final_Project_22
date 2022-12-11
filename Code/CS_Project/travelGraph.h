@@ -20,7 +20,7 @@ class TravelGraph {
     // airport struct
     struct airport {
         //functions
-        bool operator<(const airport& other);
+        //bool operator<(const airport& other);
 
         //variables
         int id;
@@ -37,6 +37,7 @@ class TravelGraph {
     vector<pair<int, int>> cleanRouteData(string fileInfo);
     vector<pair<airport, vector<pair<airport, double>>>> getAdjLists();
     vector<pair<airport, double>> getAdjacent(airport source);
+    pair<airport, vector<pair<airport, double>>>* find(const int& a1);
 
     private:
     // vector of pairs: in the pair, the first value is the source airport, and the second is a vector that 

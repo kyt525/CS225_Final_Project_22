@@ -3,21 +3,21 @@
 #include "utils.h"
 #include "travelGraph.h"
 
-#include <vector>
-#include <string>
-#include <utility>
-#include <map>
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
+class shortestPath {
+    public:
 
-//shortestPath algorithms
-double shortestDistance(VP shortestPath);
-// return the airports in between the source and destination as a vector<pair<destination airport, distance from previous>>
-VP shortestPath(TravelGraph graph, TravelGraph::airport source, TravelGraph::airport destination); 
+    // return the airports in between the source and destination as a vector<pair<destination airport, distance from previous>>
+    VP Dijkastra(TravelGraph graph, TravelGraph::airport source, TravelGraph::airport destination); 
 
-//centrality algorithms 
-double betweennessCentrality(TravelGraph graph, TravelGraph::airport node);
+    //centrality algorithms 
+    double betweennessCentrality(TravelGraph graph, TravelGraph::airport node);
 
+    private:
+    //shortestPath algorithms
+    double shortestDistance(VP shortestPath);
+};
 

@@ -13,7 +13,7 @@ class BFS{
     BFS(const vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> adj);
 
     // using BFS to traverse through every airport in the dataset, while printing its id
-    vector<int> allAirports(TravelGraph graph, TravelGraph::airport source);
+    vector<int> allAirports(TravelGraph::airport source);
 
     private:
     // vector of pairs: in the pair, the first value is the source airport, and the second is a vector that 

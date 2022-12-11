@@ -181,7 +181,32 @@ TEST_CASE("read route_medium"){
 
 }
 
+TEST_CASE("shortest path"){
+    string airportData = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/shortest_path_airports.csv");
+    string routeData = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/shortest_path_routes.csv");
+    
+    TravelGraph graph = TravelGraph(airportData, routeData);
+    ShortestPath sp = ShortestPath();
 
+    TravelGraph::airport source1 = graph.find(1)->first;
+    TravelGraph::airport dest1 = graph.find(3)->first;
+    TravelGraph::airport intermediate = graph.find(2)->first;
+    VP answer1 = {
+        {intermediate, graph.distanceBetween(source1,intermediate)}, \
+        {dest1, graph.distanceBetween(intermediate,dest1)}
+        };
+    VP pathVector1 = sp.shortestPath(graph, source1, dest1);
+    bool unbroken = true;
+    for (unsigned i = 0; i < answer1.size(); i++) {
+        pair<TravelGraph::airport, double> p1 = answer1.at(i);
+        pair<TravelGraph::airport, double> p2 = pathVector1.at(i);
+        if (!(p1.first.id == p2.first.id) || !(p1.second == p2.second)){
+            unbroken == false;
+            break;
+        };
+    }
+    REQUIRE(unbroken);
+}
 
 // TEST_CASE("BFS Test"){
 //     TravelGraph g;

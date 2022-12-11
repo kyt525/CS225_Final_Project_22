@@ -208,11 +208,21 @@ TEST_CASE("shortest path"){
     REQUIRE(unbroken);
 }
 
-// TEST_CASE("BFS Test"){
-//     TravelGraph g;
+TEST_CASE("BFS Test"){
+    string airports = "/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/stick_graph_airport.csv";
+    string routes = "/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/stick_graph_route.csv";
+    TravelGraph g(airports, routes);
 
+    vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> adj = g.getAdjLists();
+    BFS bfs(adj);
 
-// }
+    TravelGraph::airport source;
+    source.id = 2965;
+    vector<int> result = bfs.allAirports(source);
+
+    vector<int> answer = {2965, 2979, 3093, 3042, 3131};
+    REQUIRE(result == answer);
+}
 
 // TEST_CASE("Shortest Path Test"){
 //     TravelGraph g;

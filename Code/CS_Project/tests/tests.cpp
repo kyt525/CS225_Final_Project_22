@@ -63,11 +63,7 @@ TEST_CASE("airport data small") {
     TravelGraph g;
     string fileInfo = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/small_airport_test.csv");
     vector<TravelGraph::airport> data = g.cleanAirportData(fileInfo);
-
-    for(int i = 0; i < data.size(); i++){
-        cout<< data[i].id << " " <<data[i].city << " " <<data[i].country << " " <<data[i].latitude <<  " " <<data[i].longitude << endl;
-    }
-
+    
     const vector<vector<string>> answer = {
         {"1","\"Goroka\"","\"Papua New Guinea\"","-6.081689834590001","145.391998291"}, \
         {"2","\"Madang\"","\"Papua New Guinea\"","-5.20707988739","145.789001465"}, \
@@ -88,10 +84,6 @@ TEST_CASE("airport data medium") {
     TravelGraph g;
     string fileInfo = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/medium_airport_test.csv");
     vector<TravelGraph::airport> data = g.cleanAirportData(fileInfo);
-
-    for(int i = 0; i < data.size(); i++){
-        cout<< data[i].id << data[i].city << data[i].country << data[i].latitude << data[i].longitude << endl;
-    }
     
     const vector<vector<string>> answer = {
         {"21","\"Sault Sainte Marie\"", "\"Canada\"","46.485","-84.5094"},\
@@ -136,7 +128,6 @@ TEST_CASE("read route_small"){
     string fileInfo = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/small_route_test.csv");
     vector<pair<int,int>> routes  = g.cleanRouteData(fileInfo);
 
-
     const vector<vector<int>> answer = {
         {2965,2990}, \
         {2966,2990}, \
@@ -153,7 +144,7 @@ TEST_CASE("read route_small"){
 }
 
 TEST_CASE("read route_medium"){
-     TravelGraph g;
+    TravelGraph g;
     string fileInfo = file_to_string("/workspaces/CS225_Final_Project_22/Code/CS_Project/tests/medium_route_test.csv");
     vector<pair<int,int>> routes  = g.cleanRouteData(fileInfo);
 

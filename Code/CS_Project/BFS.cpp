@@ -13,10 +13,8 @@ pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>* BFS::fin
 }
 
 vector<int> BFS::allAirports(TravelGraph::airport source) {
-    // get the adjacency list from the graph
-    vector<pair<TravelGraph::airport, vector<pair<TravelGraph::airport, double>>>> adj = graph.getAdjLists();
     // get the number of vertices
-    int vertices = adj.size();
+    int vertices = adjLists.size();
     // a boolean map to store whether the vertex has been visited
     unordered_map<int, bool> visited;
     // a queue to maintain queue of vertices whose adjacency list is to be checked
@@ -28,7 +26,7 @@ vector<int> BFS::allAirports(TravelGraph::airport source) {
 
     // initialize all airports to not visited
     for(int i = 0; i < vertices; i++) 
-        visited[adj[i].first.id] = false;
+        visited[adjLists[i].first.id] = false;
 
     // add the source airport
     visited[curr] = true;

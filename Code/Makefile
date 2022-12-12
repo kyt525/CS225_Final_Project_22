@@ -1,11 +1,11 @@
 CC = g++
 CFLAGS = -Wall -g -w
 
-main: main.o travelGraph.o shortestPath.o utils.o
-	$(CC) $(CFLAGS) main.o travelGraph.o shortestPath.o utils.o -o main
+main: main.o travelGraph.o shortestPath.o BFS.o utils.o
+	$(CC) $(CFLAGS) main.o travelGraph.o shortestPath.o BFS.o utils.o -o main
 
-test: catchmain.o tests.o travelGraph.o shortestPath.o utils.o
-	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o shortestPath.o utils.o -o test
+test: catchmain.o tests.o travelGraph.o shortestPath.o BFS.o utils.o
+	$(CC) $(CFLAGS) catchmain.o tests.o travelGraph.o shortestPath.o BFS.o utils.o -o test
 
 catchmain.o: ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 
 	$(CC) $(CFLAGS) -c ./CS_Project/cs225/catch/catchmain.cpp ./CS_Project/cs225/catch/catch.hpp 
@@ -21,6 +21,9 @@ travelGraph.o: CS_Project/travelGraph.cpp CS_Project/travelGraph.h
 
 shortestPath.o: CS_Project/shortestPath.h CS_Project/shortestPath.cpp
 	$(CC) $(CFLAGS) -c CS_Project/shortestPath.cpp
+
+BFS.o: CS_Project/BFS.h CS_Project/BFS.cpp
+	$(CC) $(CFLAGS) -c CS_Project/BFS.cpp
 
 utils.o: CS_Project/utils.cpp CS_Project/utils.h
 	$(CC) $(CFLAGS) -c CS_Project/utils.cpp

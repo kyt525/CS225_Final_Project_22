@@ -14,7 +14,7 @@ VP shortestPath::Dijkastra(TravelGraph graph, TravelGraph::airport source, Trave
     VP distances;
     vector<TravelGraph::airport> v;                 //vector for airports
     vector<double> dist;  
-    priority_queue<pair<double, TravelGraph::airport>, vector<pair<double, TravelGraph::airport>>, greater<pair<double, TravelGraph::airport>>> Q;
+    priority_queue<pair<double, TravelGraph::airport>> Q;
     bool found = false;
 
     vector<pair<TravelGraph::airport, VP>> adjlist = graph.getAdjLists();
@@ -48,7 +48,7 @@ VP shortestPath::Dijkastra(TravelGraph graph, TravelGraph::airport source, Trave
     pair<double, TravelGraph::airport> step;
     double distance;
 
-    Q.pop();
+    //Q.pop();
 
     while(!Q.empty()){
         step = Q.top();
@@ -61,7 +61,7 @@ VP shortestPath::Dijkastra(TravelGraph graph, TravelGraph::airport source, Trave
         for (int i = 0; i < adj.size(); i++){
             //v[adj[i].first.id] = step.second;
             distance = step.first + adj[i].second;
-            Q.push(make_pair(distance,adj[i].first));
+            //Q.push(make_pair(distance,adj[i].first));
             if (dist[adj[i].first.id] == -1 || distance < dist[adj[i].first.id]){
                 dist[adj[i].first.id] = distance;
                 v[adj[i].first.id] = prev.second;
@@ -74,7 +74,7 @@ VP shortestPath::Dijkastra(TravelGraph graph, TravelGraph::airport source, Trave
     distances.push_back(make_pair(destination,dist[destination.id] - dist[v[destination.id].id]));
     int temp_airport = destination.id;
     while(temp_airport != source.id){
-        distances.push_back(make_pair(*(graph.find(temp_airport)).first, dist[temp_airport] - dist[v[temp_airport].id]));
+        distances.push_back(make_pair(graph.find(temp_airport)->first, dist[temp_airport] - dist[v[temp_airport].id]));
         temp_airport = v[temp_airport].id;
     }
     reverse(distances.begin(),distances.end());
@@ -85,6 +85,7 @@ VP shortestPath::Dijkastra(TravelGraph graph, TravelGraph::airport source, Trave
 double shortestPath::betweennessCentrality(TravelGraph graph, TravelGraph::airport node) {
     // for all sources and destinations (where s != d != node), centrality is the ratio:
     // shortest paths containing node/ total shortest paths
+
     vector<pair<TravelGraph::airport, VP>> adjLists = graph.getAdjLists();
     double nodeCount = 0; 
     double totalCount = 0;
@@ -99,7 +100,7 @@ double shortestPath::betweennessCentrality(TravelGraph graph, TravelGraph::airpo
             if (node.id == dest.id || source.id == dest.id) {
                 continue;
             }
-            VP path = shortestPath::shortestPath(graph, source, dest);
+            VP path = shortestPath::Dijkastra(graph, source, dest);
             for (unsigned k = 0; k < path.size(); k++) {
                 if (path.at(k).first.id == node.id) {
                     nodeCount++;
@@ -110,4 +111,6 @@ double shortestPath::betweennessCentrality(TravelGraph graph, TravelGraph::airpo
         }
     }
     return (nodeCount/totalCount);
+
+    // return 0.0;
 }

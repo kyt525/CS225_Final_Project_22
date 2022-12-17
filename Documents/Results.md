@@ -1,14 +1,15 @@
-CS225 Report on Final Project Results
-------------------------
+Dijkstra’s Algorithm
+---
+We decided to use Dijkstra’s shortest path algorithm to calculate the shortest path between a source and a destination airport. The input of this algorithm includes the travel graph, the source airport, and the destination airport. The algorithm uses these to then calculate the distance from all the vertices from the source airport and place them in a priority queue. Vertices get removed from the queue in the order of the closest locations outwards. Once the destination has been found, for all additional distances less than the current path, the algorithm will try to find a shorter path. Our algorithm outputs a vector of airports that represents the shortest path between the source and the destination airports. Dijkstra’s algorithm allows the user to travel to their destination through the shortest path according to the physical distances between them. Our implementation has a runtime of O(V^2), where V represents the number of vertices. To test Dijkstra’s algorithm, we wrote multiple test cases for smaller subsets of our dataset and required that the results of running the algorithm on the graph was the same as the expected result, which we calculated by hand. In order for the algorithm to work correctly, the subsets that we chose to test had to represent a connected graph.
 
-By Neha Valavala, Frank Lu, Shriya Surti, and Kathryn Thompson
+Betweeness Centrality Algorithm
+---
+The betweenness centrality algorithm inputs a graph and an airport and finds the level of connectedness of that airport. In simple terms, it outputs a double which represents the number of shortest paths that go through the airport in question verses the number of shortest paths in the whole graph. So, if the ratio is bigger, the airport is more connected as it is in the shortest path between more airports. The time complexity of this algorithm is pretty high because it finds the all the shortest paths in the graph. It is O(VE + (V^2)logV), where V represents the number of vertices and E represents the number of edges. In our application, the user could choose to go to a more ‘central’ airport  or one that gives them more travel.
 
-December 12, 2022
+BFS
+---
+We also used a breadth first search to traverse through the whole graph. Every airport in the dataset that is connected to the source airport are accounted for through the algorithm. The input of this algorithm is the source airport. As the algorithm exists in its own class, an instance of BFS will have to be made, with the graph, before using it. So, the algorithm has access to the graph adjacency list as its own private variable as an input. The output of this algorithm is a vector of airport IDs that represent all airports that are connected to the source airport. Both the theoretical and actual runtime of the BFS algorithm is O(V + E), where V represents the number of vertices and E represents the number of edges. And the purpose of this algorithm lets the user know all the airports that they can travel to from their current airport. We confirmed that the traversal is working by using test cases and subsets of our airports and routes datasets whose results we can manually confirm. In order for the algorithm to work correctly, the subsets that we chose to test had to represent a connected graph.
 
-**
-
-The output and correctness of each algorithm – You should summarize, visualize, or highlight some part of the full-scale run of each algorithm. Additionally, the report should briefly describe what tests you performed to confirm that each algorithm was working as intended.
-
-The answer to your leading question – You should direct address your proposed leading question. How did you answer this question? What did you discover? If your project was ultimately unsuccessful, give a brief reflection about what worked and what you would do differently as a team.
-
-**
+Leading Question
+---
+For this project, we chose to work with the OpenFlights dataset of airports and flight routes to create a Travel Planner that helps the user decide where they want to go based on their current location and the distance to the destination. In order to do so, we implemented Breadth-First Search traversal, Dijkstra’s shortest path algorithm, and the Betweenness Centrality algorithm. We chose to use an adjacency list for our graph implementation. The Breadth-First Search traversal helps the user know which airports they can travel to from the airport that they are currently at. Dijkstra’s algorithm allows the user to choose to travel the shortest distance to their destination through the resulting airports. The Betweenness Centrality algorithm allows the user to choose a more connected or busy airport if they want more travel options. One discovery we made was that we realized almost all of the routes between the airports go both ways, which means that a departing route is almost always paired with an incoming route.
